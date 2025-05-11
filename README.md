@@ -48,7 +48,7 @@ GROUP BY 1;
 Objective: Determine the distribution of content types on Netflix.
 
 **2. Find the Most Common Rating for Movies and TV Shows**
-'''sql
+```sql
 select type,rating from
 (select type,
        rating,
@@ -57,7 +57,7 @@ select type,rating from
 from netflix
 group by 1,2) as sq
 where ranking =1
-'''
+```
 
 Objective: Identify the most frequently occurring rating for each type of content.
 
@@ -71,7 +71,6 @@ Objective: Retrieve all movies released in a specific year.
 
 **4. Find the Top 5 Countries with the Most Content on Netflix**
 
-Objective: Identify the top 5 countries with the highest number of content items.
 ```sql
 select unnest(string_to_array(country,',')),
        count(*)
@@ -80,6 +79,8 @@ group by 1
 order by 2 desc
 limit 5
 ```
+Objective: Identify the top 5 countries with the highest number of content items.
+
 **5. Identify the Longest Movie**
 ```sql
 select * from netflix
@@ -95,14 +96,16 @@ Objective: Find the movie with the longest duration.
 SELECT *
 FROM netflix
 WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years';
-Objective: Retrieve content added to Netflix in the last 5 years.
 ```
+Objective: Retrieve content added to Netflix in the last 5 years.
+
 
 **7. Find All Movies/TV Shows by Director 'Rajiv Chilaka'**
 ```sql
 select * from netflix
 where director ilike '%Rajiv Chilaka%'
 ```
+Objective: List all content directed by 'Rajiv Chilaka'.
 
 **8. List All TV Shows with More Than 5 Seasons**
 ```sql
@@ -112,6 +115,7 @@ from netflix
 		type = 'TV Show' and
 		split_part(duration, ' ',1)::numeric > 5
 ```
+Objective: Identify TV shows with more than 5 seasons.
 
 **9. Count the Number of Content Items in Each Genre**
 ```select unnest(string_to_array(listed_in,',')) as genre,
